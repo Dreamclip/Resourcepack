@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resourcepack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        .minecraft-font {
+            font-family: 'Press Start 2P', cursive;
+        }
+        body {
+            background-image: url('screen.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .content-container {
+            background-color: rgba(31, 41, 55, 0.9);
+        }
+        .version-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .version-active {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .version-active:hover {
+            background-color: rgba(74, 85, 104, 0.5);
+        }
+        .version-selected {
+            background-color: rgba(74, 85, 104, 0.8);
+            border: 2px solid #10B981;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="flex max-w-4xl w-full gap-6">
+        <!-- История версий слева -->
+        <div class="w-1/3 content-container rounded-xl overflow-hidden shadow-2xl">
+            <div class="p-4">
+                <h2 class="text-lg font-bold text-green-400 mb-4 minecraft-font text-center">Version History</h2>
+                <div class="space-y-2">
+                    <!-- Версии 1.0-1.6 - отключены -->
+                    <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
+                        <div class="text-red-400 minecraft-font text-xs">v1.0</div>
+                        <div class="text-gray-400 text-xs mt-1">Disabled</div>
+                    </div>
+                    <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
+                        <div class="text-red-400 minecraft-font text-xs">v1.1</div>
+                        <div class="text-gray-400 text-xs mt-1">Disabled</div>
+                    </div>
+                    <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
+                        <div class="text-red-400 minecraft-font text-xs">v1.2</div>
+                        <div class="text-gray-400 text-xs mt-1">Disabled</div>
+                    </div>
+                    <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
+                        <div class="text-red-400 minecraft-font text-xs">v1.3</div>
+                        <div class="text-gray-400 text-xs mt-1">Disabled</div>
+                    </div>
+                    <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
+                        <div class="text-red-400 minecraft-font text-xs">v1.4</div>
+                        <div class="text-gray-400 text-xs mt-1">Old</div>
+                    </div>
+                    <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
+                        <div class="text-red-400 minecraft-font text-xs">v1.5</div>
+                        <div class="text-gray-400 text-xs mt-1">Old</div>
+                    </div>
+                    <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
+                        <div class="text-red-400 minecraft-font text-xs">v1.6</div>
+                        <div class="text-gray-400 text-xs mt-1">Old</div>
+                    </div>
+                    
+                    <!-- Версия 1.7 - активна -->
+                    <div class="version-active p-3 bg-gray-700 rounded-lg text-center" id="version-1.7" onclick="selectVersion('1.7')">
+                        <div class="text-green-400 minecraft-font text-xs">v1.7</div>
+                        <div class="text-gray-300 text-xs mt-1">Available</div>
+                    </div>
+                    
+                    <!-- Версия 1.8 - активна -->
+                    <div class="version-active version-selected p-3 bg-gray-700 rounded-lg text-center" id="version-1.8" onclick="selectVersion('1.8')">
+                        <div class="text-green-400 minecraft-font text-xs">v1.8</div>
+                        <div class="text-gray-300 text-xs mt-1">Available</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Основной контент справа -->
+        <div class="flex-1 content-container rounded-xl overflow-hidden shadow-2xl">
+            <div class="p-6 text-center">
+                <h1 class="text-2xl font-bold text-green-400 mb-6 minecraft-font">Tea Fnaf Resourcepack</h1>
+                
+                <div class="w-64 h-64 mx-auto mb-8 relative">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-40 h-40 bg-amber-800 border-4 border-amber-900 flex items-center justify-center">
+                            <span class="text-6xl font-bold text-white minecraft-font">F</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-gray-300 mb-6 text-sm">
+                    Custom Resourcepack for map "Tea Fnaf".
+                </p>
+                
+                <div id="downloadSection">
+                    <a href="#" id="downloadLink" class="inline-block px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg transition duration-200 minecraft-font text-sm" onclick="downloadFile()">
+                        <i data-feather="download" class="inline mr-2"></i> Download v1.8
+                    </a>
+                    <p id="fileInfo" class="text-gray-400 text-xs mt-2">Downloading: FnafV1.8.zip</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        feather.replace();
+        
+        let currentVersion = '1.8';
+        const versionFiles = {
+            '1.7': 'FnafV1.7.zip',
+            '1.8': 'FnafV1.8.zip'
+        };
+
+        function selectVersion(version) {
+            if (version === '1.7' || version === '1.8') {
+                currentVersion = version;
+                updateDownloadSection();
+                
+                // Обновляем выделение версий
+                document.getElementById('version-1.7').classList.remove('version-selected');
+                document.getElementById('version-1.8').classList.remove('version-selected');
+                document.getElementById(`version-${version}`).classList.add('version-selected');
+            }
+        }
+
+        function updateDownloadSection() {
+            const downloadLink = document.getElementById('downloadLink');
+            const fileInfo = document.getElementById('fileInfo');
+            
+            downloadLink.innerHTML = `<i data-feather="download" class="inline mr-2"></i> Download v${currentVersion}`;
+            fileInfo.textContent = `Downloading: ${versionFiles[currentVersion]}`;
+            
+            // Обновляем иконки Feather
+            feather.replace();
+        }
+
+        function downloadFile() {
+            const fileName = versionFiles[currentVersion];
+            
+            // Создаем временную ссылку для загрузки
+            const link = document.createElement('a');
+            link.href = fileName; // Укажите правильный путь к файлу
+            
+            // Если файл существует по указанному пути, он скачается
+            // Если файла нет, можно создать заглушку или показать сообщение
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Альтернативно, можно показать сообщение если файл не найден
+            alert(`Загрузка ${fileName}.`);
+        }
+
+        // Изначальная настройка
+        updateDownloadSection();
+    </script>
+</body>
+</html>
