@@ -34,6 +34,12 @@
             background-color: rgba(74, 85, 104, 0.8);
             border: 2px solid #10B981;
         }
+        .version-development {
+            border: 2px solid #F59E0B;
+        }
+        .text-yellow-400 {
+            color: #F59E0B;
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -78,7 +84,7 @@
                     </div>
                     
                     <!-- Версия 1.8 - at -->
-                    <div class="version-active version-selected p-3 bg-gray-700 rounded-lg text-center" id="version-1.8" onclick="selectVersion('1.8')">
+                    <div class="version-active p-3 bg-gray-700 rounded-lg text-center" id="version-1.8" onclick="selectVersion('1.8')">
                         <div class="text-green-400 minecraft-font text-xs">v1.8</div>
                         <div class="text-gray-300 text-xs mt-1">Available</div>
                     </div>
@@ -87,6 +93,12 @@
                     <div class="version-active version-selected p-3 bg-gray-700 rounded-lg text-center" id="version-1.9" onclick="selectVersion('1.9')">
                         <div class="text-green-400 minecraft-font text-xs">v1.9</div>
                         <div class="text-gray-300 text-xs mt-1">Available</div>
+                    </div>
+                    
+                    <!-- Версия EXTRA-1.9 - Development -->
+                    <div class="version-active p-3 bg-gray-700 rounded-lg text-center" id="version-extra-1.9" onclick="selectVersion('extra-1.9')">
+                        <div class="text-yellow-400 minecraft-font text-xs">EXTRA-1.9</div>
+                        <div class="text-gray-300 text-xs mt-1">Development</div>
                     </div>
                 </div>
             </div>
@@ -126,18 +138,27 @@
         let currentVersion = '1.9';
         const versionFiles = {
             '1.8': 'FnafV1.8.zip',
-            '1.9': 'FnafV1.9.zip'
+            '1.9': 'FnafV1.9.zip',
+            'extra-1.9': 'FnafEXTRA-1.9.zip',
         };
 
         function selectVersion(version) {
-            if (version === '1.8' || version === '1.9') {
+            if (version === '1.8' || version === '1.9' || version === 'extra-1.9') {
                 currentVersion = version;
                 updateDownloadSection();
                 
                 // Обновляем выделение версий
-                document.getElementById('version-1.8').classList.remove('version-selected');
-                document.getElementById('version-1.9').classList.remove('version-selected');
-                document.getElementById(`version-${version}`).classList.add('version-selected');
+                document.getElementById('version-1.8').classList.remove('version-selected', 'version-development');
+                document.getElementById('version-1.9').classList.remove('version-selected', 'version-development');
+                document.getElementById('version-extra-1.9').classList.remove('version-selected', 'version-development');
+                
+                // Добавляем соответствующий стиль для выбранной версии
+                const selectedElement = document.getElementById(`version-${version}`);
+                if (version === 'extra-1.9') {
+                    selectedElement.classList.add('version-development');
+                } else {
+                    selectedElement.classList.add('version-selected');
+                }
             }
         }
 
@@ -145,7 +166,15 @@
             const downloadLink = document.getElementById('downloadLink');
             const fileInfo = document.getElementById('fileInfo');
             
-            downloadLink.innerHTML = `<i data-feather="download" class="inline mr-2"></i> Download v${currentVersion}`;
+            // Обновляем текст кнопки в зависимости от версии
+            if (currentVersion === 'extra-1.9') {
+                downloadLink.innerHTML = `<i data-feather="download" class="inline mr-2"></i> Download EXTRA-1.9`;
+                downloadLink.className = 'inline-block px-6 py-3 bg-yellow-600 hover:bg-yellow-500 text-white font-bold rounded-lg transition duration-200 minecraft-font text-sm';
+            } else {
+                downloadLink.innerHTML = `<i data-feather="download" class="inline mr-2"></i> Download v${currentVersion}`;
+                downloadLink.className = 'inline-block px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg transition duration-200 minecraft-font text-sm';
+            }
+            
             fileInfo.textContent = `Downloading: ${versionFiles[currentVersion]}`;
             
             // Обновляем иконки Feather
@@ -176,6 +205,7 @@
     </script>
 </body>
 </html>
+
 
 
 
