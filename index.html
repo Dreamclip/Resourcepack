@@ -76,12 +76,18 @@
                     <!-- Версия 1.7 - активна -->
                     <div class="version-active p-3 bg-gray-700 rounded-lg text-center" id="version-1.7" onclick="selectVersion('1.7')">
                         <div class="text-green-400 minecraft-font text-xs">v1.7</div>
-                        <div class="text-gray-300 text-xs mt-1">Available</div>
+                        <div class="text-gray-300 text-xs mt-1">Disable</div>
                     </div>
                     
                     <!-- Версия 1.8 - активна -->
                     <div class="version-active version-selected p-3 bg-gray-700 rounded-lg text-center" id="version-1.8" onclick="selectVersion('1.8')">
                         <div class="text-green-400 minecraft-font text-xs">v1.8</div>
+                        <div class="text-gray-300 text-xs mt-1">Available</div>
+                    </div>
+
+                    <!-- Версия 1.8 - активна -->
+                    <div class="version-active version-selected p-3 bg-gray-700 rounded-lg text-center" id="version-1.8" onclick="selectVersion('1.8')">
+                        <div class="text-green-400 minecraft-font text-xs">v1.9</div>
                         <div class="text-gray-300 text-xs mt-1">Available</div>
                     </div>
                 </div>
@@ -107,9 +113,9 @@
                 
                 <div id="downloadSection">
                     <a href="#" id="downloadLink" class="inline-block px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg transition duration-200 minecraft-font text-sm" onclick="downloadFile()">
-                        <i data-feather="download" class="inline mr-2"></i> Download v1.8
+                        <i data-feather="download" class="inline mr-2"></i> Download v1.9
                     </a>
-                    <p id="fileInfo" class="text-gray-400 text-xs mt-2">Downloading: FnafV1.7.zip</p>
+                    <p id="fileInfo" class="text-gray-400 text-xs mt-2">Downloading: FnafV1.9.zip</p>
                 </div>
             </div>
         </div>
@@ -119,10 +125,10 @@
     <script>
         feather.replace();
         
-        let currentVersion = '1.8';
+        let currentVersion = '1.9';
         const versionFiles = {
-            '1.7': 'FnafV1.7.zip',
-            '1.8': 'FnafV1.7.zip'
+            '1.8': 'FnafV1.8.zip',
+            '1.9': 'FnafV1.9.zip'
         };
 
         function selectVersion(version) {
@@ -172,5 +178,6 @@
     </script>
 </body>
 </html>
+
 
 
