@@ -47,6 +47,15 @@
             background-color: rgba(55, 65, 81, 0.9);
             border-bottom: 2px solid #10B981;
         }
+        .countdown-timer {
+            font-size: 10px;
+            color: #EF4444;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -55,75 +64,72 @@
         <div class="w-1/3 content-container rounded-xl overflow-hidden shadow-2xl">
             <!-- Табы для переключения между версиями -->
             <div class="flex border-b border-gray-600">
-                <button class="flex-1 tab-button active py-3 text-green-400 minecraft-font text-xs" onclick="switchTab('legacy')">
+                <button class="flex-1 tab-button py-3 text-green-400 minecraft-font text-xs" onclick="switchTab('legacy')">
                     Legacy
                 </button>
-                <button class="flex-1 tab-button py-3 text-blue-400 minecraft-font text-xs" onclick="switchTab('v2')">
+                <button class="flex-1 tab-button active py-3 text-blue-400 minecraft-font text-xs" onclick="switchTab('v2')">
                     v2.0
                 </button>
             </div>
             
             <div class="p-4">
                 <!-- Legacy Tab Content -->
-                <div id="legacy-tab" class="tab-content">
-                    <h2 class="text-lg font-bold text-green-400 mb-4 minecraft-font text-center">Version History</h2>
+                <div id="legacy-tab" class="tab-content hidden">
+                    <h2 class="text-lg font-bold text-green-400 mb-4 minecraft-font text-center">Legacy Versions</h2>
                     <div class="space-y-2">
-                        <!-- Версии 1.0-1.7 - отключены -->
+                        <!-- Все старые версии отключены -->
                         <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
                             <div class="text-red-400 minecraft-font text-xs">v1.0</div>
-                            <div class="text-gray-400 text-xs mt-1">Old</div>
+                            <div class="text-gray-400 text-xs mt-1">Closed</div>
                         </div>
                         <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
                             <div class="text-red-400 minecraft-font text-xs">v1.1</div>
-                            <div class="text-gray-400 text-xs mt-1">Old</div>
+                            <div class="text-gray-400 text-xs mt-1">Closed</div>
                         </div>
                         <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
                             <div class="text-red-400 minecraft-font text-xs">v1.2</div>
-                            <div class="text-gray-400 text-xs mt-1">Old</div>
+                            <div class="text-gray-400 text-xs mt-1">Closed</div>
                         </div>
                         <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
                             <div class="text-red-400 minecraft-font text-xs">v1.3</div>
-                            <div class="text-gray-400 text-xs mt-1">Old</div>
+                            <div class="text-gray-400 text-xs mt-1">Closed</div>
                         </div>
                         <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
                             <div class="text-red-400 minecraft-font text-xs">v1.4</div>
-                            <div class="text-gray-400 text-xs mt-1">Old</div>
+                            <div class="text-gray-400 text-xs mt-1">Closed</div>
                         </div>
                         <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
                             <div class="text-red-400 minecraft-font text-xs">v1.5</div>
-                            <div class="text-gray-400 text-xs mt-1">Old</div>
+                            <div class="text-gray-400 text-xs mt-1">Closed</div>
                         </div>
                         <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
                             <div class="text-red-400 minecraft-font text-xs">v1.6</div>
-                            <div class="text-gray-400 text-xs mt-1">Disabled</div>
+                            <div class="text-gray-400 text-xs mt-1">Closed</div>
                         </div>
                         <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
                             <div class="text-red-400 minecraft-font text-xs">v1.7</div>
-                            <div class="text-gray-400 text-xs mt-1">Disabled</div>
+                            <div class="text-gray-400 text-xs mt-1">Closed</div>
+                        </div>
+                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
+                            <div class="text-red-400 minecraft-font text-xs">v1.8</div>
+                            <div class="text-gray-400 text-xs mt-1">Closed</div>
+                        </div>
+                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
+                            <div class="text-red-400 minecraft-font text-xs">v1.9</div>
+                            <div class="text-gray-400 text-xs mt-1">Closed</div>
                         </div>
                         
-                        <!-- Версия 1.8 -->
-                        <div class="version-active p-3 bg-gray-700 rounded-lg text-center" id="version-1.8" onclick="selectVersion('1.8')">
-                            <div class="text-green-400 minecraft-font text-xs">v1.8</div>
-                            <div class="text-gray-300 text-xs mt-1">Available</div>
-                        </div>
-
-                        <!-- Версия 1.9 -->
-                        <div class="version-active version-selected p-3 bg-gray-700 rounded-lg text-center" id="version-1.9" onclick="selectVersion('1.9')">
-                            <div class="text-green-400 minecraft-font text-xs">v1.9</div>
-                            <div class="text-gray-300 text-xs mt-1">Available</div>
-                        </div>
-                        
-                        <!-- Версия EXTRA-1.9 - Development -->
-                        <div class="version-active p-3 bg-gray-700 rounded-lg text-center" id="version-extra-1.9" onclick="selectVersion('extra-1.9')">
+                        <!-- Единственная доступная версия в Legacy - EXTRA-1.9 -->
+                        <div class="version-active version-selected version-development p-3 bg-gray-700 rounded-lg text-center" id="version-extra-1.9" onclick="selectVersion('extra-1.9')">
                             <div class="text-yellow-400 minecraft-font text-xs">EXTRA-1.9</div>
-                            <div class="text-gray-300 text-xs mt-1">Development</div>
+                            <div class="text-green-400 text-xs mt-1">Available</div>
+                            <div id="countdown-timer" class="countdown-timer minecraft-font mt-2"></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- v2.0 Tab Content -->
-                <div id="v2-tab" class="tab-content hidden">
+                <div id="v2-tab" class="tab-content">
                     <h2 class="text-lg font-bold text-blue-400 mb-4 minecraft-font text-center">v2.0 Series</h2>
                     <div class="space-y-2">
                         <!-- Версия 2.0 -->
@@ -154,10 +160,10 @@
                 </p>
                 
                 <div id="downloadSection">
-                    <a href="#" id="downloadLink" class="inline-block px-6 py-3 bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg transition duration-200 minecraft-font text-sm" onclick="downloadFile()">
-                        <i data-feather="download" class="inline mr-2"></i> Download v1.9
+                    <a href="#" id="downloadLink" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition duration-200 minecraft-font text-sm" onclick="downloadFile()">
+                        <i data-feather="download" class="inline mr-2"></i> Download v2.0
                     </a>
-                    <p id="fileInfo" class="text-gray-400 text-xs mt-2">Downloading: FnafV1.9.zip</p>
+                    <p id="fileInfo" class="text-gray-400 text-xs mt-2">Downloading: FnafV2.0.zip</p>
                 </div>
             </div>
         </div>
@@ -167,11 +173,15 @@
     <script>
         feather.replace();
         
-        let currentVersion = '1.9';
-        let currentTab = 'legacy';
+        let currentVersion = '2.0';
+        let currentTab = 'v2';
+        
+        // Устанавливаем дату закрытия (текущая дата + 3 дня)
+        const closingDate = new Date();
+        closingDate.setDate(closingDate.getDate() + 3);
+        closingDate.setHours(23, 59, 59, 999); // Устанавливаем на конец дня
+
         const versionFiles = {
-            '1.8': 'FnafV1.8.zip',
-            '1.9': 'FnafV1.9.zip',
             'extra-1.9': 'FnafEXTRA-1.9.zip',
             '2.0': 'FnafV2.0.zip',
         };
@@ -195,30 +205,20 @@
             
             // Автоматически выбираем первую доступную версию при переключении таба
             if (tabName === 'legacy') {
-                selectVersion('1.9');
+                selectVersion('extra-1.9');
             } else if (tabName === 'v2') {
                 selectVersion('2.0');
             }
         }
 
         function selectVersion(version) {
-            if (version === '1.8' || version === '1.9' || version === 'extra-1.9' || version === '2.0') {
+            if (version === 'extra-1.9' || version === '2.0') {
                 currentVersion = version;
                 updateDownloadSection();
                 
                 // Обновляем выделение версий в активном табе
                 if (currentTab === 'legacy') {
-                    document.getElementById('version-1.8').classList.remove('version-selected', 'version-development');
-                    document.getElementById('version-1.9').classList.remove('version-selected', 'version-development');
-                    document.getElementById('version-extra-1.9').classList.remove('version-selected', 'version-development');
-                    
-                    // Добавляем соответствующий стиль для выбранной версии
-                    const selectedElement = document.getElementById(`version-${version}`);
-                    if (version === 'extra-1.9') {
-                        selectedElement.classList.add('version-development');
-                    } else {
-                        selectedElement.classList.add('version-selected');
-                    }
+                    document.getElementById('version-extra-1.9').classList.add('version-selected', 'version-development');
                 } else if (currentTab === 'v2') {
                     document.getElementById('version-2.0').classList.add('version-selected');
                 }
@@ -242,10 +242,6 @@
                     buttonText = 'Download v2.0';
                     buttonClass += ' bg-blue-600 hover:bg-blue-500';
                     break;
-                default:
-                    buttonText = `Download v${currentVersion}`;
-                    buttonClass += ' bg-green-600 hover:bg-green-500';
-                    break;
             }
             
             downloadLink.innerHTML = `<i data-feather="download" class="inline mr-2"></i> ${buttonText}`;
@@ -254,6 +250,37 @@
             
             // Обновляем иконки Feather
             feather.replace();
+        }
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeLeft = closingDate - now;
+            
+            if (timeLeft <= 0) {
+                // Время вышло - закрываем доступ к EXTRA версии
+                document.getElementById('countdown-timer').textContent = 'CLOSED';
+                document.getElementById('version-extra-1.9').classList.remove('version-active', 'version-selected');
+                document.getElementById('version-extra-1.9').classList.add('version-disabled');
+                document.getElementById('version-extra-1.9').onclick = null;
+                
+                // Обновляем статус
+                const statusDiv = document.querySelector('#version-extra-1.9 .text-green-400');
+                if (statusDiv) {
+                    statusDiv.textContent = 'Closed';
+                    statusDiv.className = 'text-red-400 text-xs mt-1';
+                }
+                return;
+            }
+            
+            // Вычисляем оставшееся время
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            // Форматируем время
+            const formattedTime = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            document.getElementById('countdown-timer').textContent = `CLOSES IN: ${formattedTime}`;
         }
 
         function downloadFile() {
@@ -273,6 +300,10 @@
 
         // Изначальная настройка
         updateDownloadSection();
+        
+        // Запускаем отсчет времени
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
