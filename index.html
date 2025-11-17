@@ -132,10 +132,22 @@
                 <div id="v2-tab" class="tab-content">
                     <h2 class="text-lg font-bold text-blue-400 mb-4 minecraft-font text-center">v2.0 Series</h2>
                     <div class="space-y-2">
-                        <!-- Версия 2.0 -->
-                        <div class="version-active version-selected p-3 bg-gray-700 rounded-lg text-center" id="version-2.0" onclick="selectVersion('2.0')">
-                            <div class="text-blue-400 minecraft-font text-xs">v2.0</div>
+                        <!-- Версия 2.0 (закрыта) -->
+                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
+                            <div class="text-red-400 minecraft-font text-xs">v2.0</div>
+                            <div class="text-gray-400 text-xs mt-1">Closed</div>
+                        </div>
+                        
+                        <!-- Версия 2.1 -->
+                        <div class="version-active version-selected p-3 bg-gray-700 rounded-lg text-center" id="version-2.1" onclick="selectVersion('2.1')">
+                            <div class="text-blue-400 minecraft-font text-xs">v2.1</div>
                             <div class="text-gray-300 text-xs mt-1">Latest</div>
+                        </div>
+                        
+                        <!-- Версия 2.2 -->
+                        <div class="version-active p-3 bg-gray-700 rounded-lg text-center" id="version-2.2" onclick="selectVersion('2.2')">
+                            <div class="text-blue-400 minecraft-font text-xs">v2.2</div>
+                            <div class="text-gray-300 text-xs mt-1">Available</div>
                         </div>
                     </div>
                 </div>
@@ -161,9 +173,9 @@
                 
                 <div id="downloadSection">
                     <a href="#" id="downloadLink" class="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition duration-200 minecraft-font text-sm" onclick="downloadFile()">
-                        <i data-feather="download" class="inline mr-2"></i> Download v2.0
+                        <i data-feather="download" class="inline mr-2"></i> Download v2.1
                     </a>
-                    <p id="fileInfo" class="text-gray-400 text-xs mt-2">Downloading: FnafV2.0.zip</p>
+                    <p id="fileInfo" class="text-gray-400 text-xs mt-2">Downloading: FnafV2.1.zip</p>
                 </div>
             </div>
         </div>
@@ -173,7 +185,7 @@
     <script>
         feather.replace();
         
-        let currentVersion = '2.0';
+        let currentVersion = '2.1';
         let currentTab = 'v2';
         
         // Устанавливаем дату закрытия (текущая дата + 3 дня)
@@ -184,6 +196,8 @@
         const versionFiles = {
             'extra-1.9': 'FnafEXTRA-1.9.zip',
             '2.0': 'FnafV2.0.zip',
+            '2.1': 'FnafV2.1.zip',
+            '2.2': 'FnafV2.2.zip'
         };
 
         function switchTab(tabName) {
@@ -207,12 +221,12 @@
             if (tabName === 'legacy') {
                 selectVersion('extra-1.9');
             } else if (tabName === 'v2') {
-                selectVersion('2.0');
+                selectVersion('2.1');
             }
         }
 
         function selectVersion(version) {
-            if (version === 'extra-1.9' || version === '2.0') {
+            if (version === 'extra-1.9' || version === '2.1' || version === '2.2') {
                 currentVersion = version;
                 updateDownloadSection();
                 
@@ -220,7 +234,12 @@
                 if (currentTab === 'legacy') {
                     document.getElementById('version-extra-1.9').classList.add('version-selected', 'version-development');
                 } else if (currentTab === 'v2') {
-                    document.getElementById('version-2.0').classList.add('version-selected');
+                    // Убираем выделение со всех версий
+                    document.querySelectorAll('#v2-tab .version-active').forEach(element => {
+                        element.classList.remove('version-selected');
+                    });
+                    // Добавляем выделение к выбранной версии
+                    document.getElementById(`version-${version}`).classList.add('version-selected');
                 }
             }
         }
@@ -238,8 +257,12 @@
                     buttonText = 'Download EXTRA-1.9';
                     buttonClass += ' bg-yellow-600 hover:bg-yellow-500';
                     break;
-                case '2.0':
-                    buttonText = 'Download v2.0';
+                case '2.1':
+                    buttonText = 'Download v2.1';
+                    buttonClass += ' bg-blue-600 hover:bg-blue-500';
+                    break;
+                case '2.2':
+                    buttonText = 'Download v2.2';
                     buttonClass += ' bg-blue-600 hover:bg-blue-500';
                     break;
             }
