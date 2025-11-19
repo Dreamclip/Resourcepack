@@ -40,6 +40,9 @@
         .text-yellow-400 {
             color: #F59E0B;
         }
+        .text-purple-400 {
+            color: #A855F7;
+        }
         .tab-button {
             transition: all 0.3s;
         }
@@ -64,70 +67,15 @@
         <div class="w-1/3 content-container rounded-xl overflow-hidden shadow-2xl">
             <!-- Табы для переключения между версиями -->
             <div class="flex border-b border-gray-600">
-                <button class="flex-1 tab-button py-3 text-green-400 minecraft-font text-xs" onclick="switchTab('legacy')">
-                    Legacy
-                </button>
-                <button class="flex-1 tab-button active py-3 text-blue-400 minecraft-font text-xs" onclick="switchTab('v2')">
+                <button class="flex-1 tab-button py-3 text-blue-400 minecraft-font text-xs active" onclick="switchTab('v2')">
                     v2.0
+                </button>
+                <button class="flex-1 tab-button py-3 text-purple-400 minecraft-font text-xs" onclick="switchTab('uncover')">
+                    Uncover
                 </button>
             </div>
             
             <div class="p-4">
-                <!-- Legacy Tab Content -->
-                <div id="legacy-tab" class="tab-content hidden">
-                    <h2 class="text-lg font-bold text-green-400 mb-4 minecraft-font text-center">Legacy Versions</h2>
-                    <div class="space-y-2">
-                        <!-- Все старые версии отключены -->
-                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
-                            <div class="text-red-400 minecraft-font text-xs">v1.0</div>
-                            <div class="text-gray-400 text-xs mt-1">Closed</div>
-                        </div>
-                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
-                            <div class="text-red-400 minecraft-font text-xs">v1.1</div>
-                            <div class="text-gray-400 text-xs mt-1">Closed</div>
-                        </div>
-                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
-                            <div class="text-red-400 minecraft-font text-xs">v1.2</div>
-                            <div class="text-gray-400 text-xs mt-1">Closed</div>
-                        </div>
-                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
-                            <div class="text-red-400 minecraft-font text-xs">v1.3</div>
-                            <div class="text-gray-400 text-xs mt-1">Closed</div>
-                        </div>
-                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
-                            <div class="text-red-400 minecraft-font text-xs">v1.4</div>
-                            <div class="text-gray-400 text-xs mt-1">Closed</div>
-                        </div>
-                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
-                            <div class="text-red-400 minecraft-font text-xs">v1.5</div>
-                            <div class="text-gray-400 text-xs mt-1">Closed</div>
-                        </div>
-                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
-                            <div class="text-red-400 minecraft-font text-xs">v1.6</div>
-                            <div class="text-gray-400 text-xs mt-1">Closed</div>
-                        </div>
-                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
-                            <div class="text-red-400 minecraft-font text-xs">v1.7</div>
-                            <div class="text-gray-400 text-xs mt-1">Closed</div>
-                        </div>
-                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
-                            <div class="text-red-400 minecraft-font text-xs">v1.8</div>
-                            <div class="text-gray-400 text-xs mt-1">Closed</div>
-                        </div>
-                        <div class="version-disabled p-3 bg-gray-700 rounded-lg text-center">
-                            <div class="text-red-400 minecraft-font text-xs">v1.9</div>
-                            <div class="text-gray-400 text-xs mt-1">Closed</div>
-                        </div>
-                        
-                        <!-- Единственная доступная версия в Legacy - EXTRA-1.9 -->
-                        <div class="version-active version-selected version-development p-3 bg-gray-700 rounded-lg text-center" id="version-extra-1.9" onclick="selectVersion('extra-1.9')">
-                            <div class="text-yellow-400 minecraft-font text-xs">EXTRA-1.9</div>
-                            <div class="text-green-400 text-xs mt-1">Available</div>
-                            <div id="countdown-timer" class="countdown-timer minecraft-font mt-2"></div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- v2.0 Tab Content -->
                 <div id="v2-tab" class="tab-content">
                     <h2 class="text-lg font-bold text-blue-400 mb-4 minecraft-font text-center">v2.0 Series</h2>
@@ -141,13 +89,25 @@
                         <!-- Версия 2.1 -->
                         <div class="version-active version-selected p-3 bg-gray-700 rounded-lg text-center" id="version-2.1" onclick="selectVersion('2.1')">
                             <div class="text-blue-400 minecraft-font text-xs">v2.1</div>
-                            <div class="text-gray-300 text-xs mt-1">Available</div>
+                            <div class="text-gray-300 text-xs mt-1">Latest</div>
                         </div>
                         
                         <!-- Версия 2.2 -->
                         <div class="version-active p-3 bg-gray-700 rounded-lg text-center" id="version-2.2" onclick="selectVersion('2.2')">
                             <div class="text-blue-400 minecraft-font text-xs">v2.2</div>
-                            <div class="text-gray-300 text-xs mt-1">Latest</div>
+                            <div class="text-gray-300 text-xs mt-1">Available</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Uncover Tab Content -->
+                <div id="uncover-tab" class="tab-content hidden">
+                    <h2 class="text-lg font-bold text-purple-400 mb-4 minecraft-font text-center">Uncover Series</h2>
+                    <div class="space-y-2">
+                        <!-- Версия 2.3 -->
+                        <div class="version-active p-3 bg-gray-700 rounded-lg text-center" id="version-2.3" onclick="selectVersion('2.3')">
+                            <div class="text-purple-400 minecraft-font text-xs">v2.3</div>
+                            <div class="text-gray-300 text-xs mt-1">Uncover Edition</div>
                         </div>
                     </div>
                 </div>
@@ -188,16 +148,11 @@
         let currentVersion = '2.1';
         let currentTab = 'v2';
         
-        // Устанавливаем дату закрытия (текущая дата + 3 дня)
-        const closingDate = new Date();
-        closingDate.setDate(closingDate.getDate() + 3);
-        closingDate.setHours(23, 59, 59, 999); // Устанавливаем на конец дня
-
         const versionFiles = {
-            'extra-1.9': 'FnafEXTRA-1.9.zip',
             '2.0': 'FnafV2.0.zip',
             '2.1': 'FnafV2.1.zip',
-            '2.2': 'FnafV2.2.zip'
+            '2.2': 'FnafV2.2.zip',
+            '2.3': 'FnafV2.3.zip'
         };
 
         function switchTab(tabName) {
@@ -218,24 +173,29 @@
             currentTab = tabName;
             
             // Автоматически выбираем первую доступную версию при переключении таба
-            if (tabName === 'legacy') {
-                selectVersion('extra-1.9');
-            } else if (tabName === 'v2') {
+            if (tabName === 'v2') {
                 selectVersion('2.1');
+            } else if (tabName === 'uncover') {
+                selectVersion('2.3');
             }
         }
 
         function selectVersion(version) {
-            if (version === 'extra-1.9' || version === '2.1' || version === '2.2') {
+            if (version === '2.1' || version === '2.2' || version === '2.3') {
                 currentVersion = version;
                 updateDownloadSection();
                 
                 // Обновляем выделение версий в активном табе
-                if (currentTab === 'legacy') {
-                    document.getElementById('version-extra-1.9').classList.add('version-selected', 'version-development');
-                } else if (currentTab === 'v2') {
+                if (currentTab === 'v2') {
                     // Убираем выделение со всех версий
                     document.querySelectorAll('#v2-tab .version-active').forEach(element => {
+                        element.classList.remove('version-selected');
+                    });
+                    // Добавляем выделение к выбранной версии
+                    document.getElementById(`version-${version}`).classList.add('version-selected');
+                } else if (currentTab === 'uncover') {
+                    // Убираем выделение со всех версий
+                    document.querySelectorAll('#uncover-tab .version-active').forEach(element => {
                         element.classList.remove('version-selected');
                     });
                     // Добавляем выделение к выбранной версии
@@ -253,10 +213,6 @@
             let buttonText = '';
             
             switch(currentVersion) {
-                case 'extra-1.9':
-                    buttonText = 'Download EXTRA-1.9';
-                    buttonClass += ' bg-yellow-600 hover:bg-yellow-500';
-                    break;
                 case '2.1':
                     buttonText = 'Download v2.1';
                     buttonClass += ' bg-blue-600 hover:bg-blue-500';
@@ -264,6 +220,10 @@
                 case '2.2':
                     buttonText = 'Download v2.2';
                     buttonClass += ' bg-blue-600 hover:bg-blue-500';
+                    break;
+                case '2.3':
+                    buttonText = 'Download v2.3';
+                    buttonClass += ' bg-purple-600 hover:bg-purple-500';
                     break;
             }
             
@@ -273,37 +233,6 @@
             
             // Обновляем иконки Feather
             feather.replace();
-        }
-
-        function updateCountdown() {
-            const now = new Date();
-            const timeLeft = closingDate - now;
-            
-            if (timeLeft <= 0) {
-                // Время вышло - закрываем доступ к EXTRA версии
-                document.getElementById('countdown-timer').textContent = 'CLOSED';
-                document.getElementById('version-extra-1.9').classList.remove('version-active', 'version-selected');
-                document.getElementById('version-extra-1.9').classList.add('version-disabled');
-                document.getElementById('version-extra-1.9').onclick = null;
-                
-                // Обновляем статус
-                const statusDiv = document.querySelector('#version-extra-1.9 .text-green-400');
-                if (statusDiv) {
-                    statusDiv.textContent = 'Closed';
-                    statusDiv.className = 'text-red-400 text-xs mt-1';
-                }
-                return;
-            }
-            
-            // Вычисляем оставшееся время
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-            
-            // Форматируем время
-            const formattedTime = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            document.getElementById('countdown-timer').textContent = `CLOSES IN: ${formattedTime}`;
         }
 
         function downloadFile() {
@@ -323,11 +252,8 @@
 
         // Изначальная настройка
         updateDownloadSection();
-        
-        // Запускаем отсчет времени
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
+
 
